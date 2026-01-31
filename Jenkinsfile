@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Hello') {
       steps {
-        echo 'Hello From Jenkins uploaded by codex after 2 min!'
+        echo 'Hello From Jenkins uploaded by codex using webhook!'
       }
     }
   }
