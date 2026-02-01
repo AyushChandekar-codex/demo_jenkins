@@ -32,8 +32,8 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Install dependencies to serve frontend build
-RUN npm install -g serve supervisor
+# Install serve for frontend static files
+RUN npm install -g serve
 
 # Copy backend code + node_modules
 COPY --from=backend-build /app/backend /app/backend
@@ -41,9 +41,10 @@ COPY --from=backend-build /app/backend /app/backend
 # Copy frontend dist build
 COPY --from=frontend-build /app/frontend/dist /app/frontend/dist
 
-# Copy supervisor config
-COPY supervisor.conf /etc/supervisor/conf.d/supervisor.conf
+# Copy startup script
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
 
 EXPOSE 5000 3000
 
-CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisor.conf"]
+CMD ["/app/start.sh"]
