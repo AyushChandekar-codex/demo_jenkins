@@ -16,7 +16,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/AyushChandekar-codex/demo_jenkins.git'
+                checkout scm
             }
         }
 
